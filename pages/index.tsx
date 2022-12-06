@@ -8,18 +8,23 @@ export default function Home() {
   const [ url, setUrl ] = useState('')
 
   useEffect(() => {
-    const query = router.query;
-    if (query && query.state) {
-      const decodedUrl = decodeURIComponent(query.state as string);
+    //https://vscode-redirect-9ajo.vercel.app/?code=6p9PmlVomT-9T2QvSQ2VRlEAwkVfIYtoEMBRaDeSqi1sl&state=https%253A%252F%252Festruyf-opulent-capybara-4grqx5g7953754v.github.dev%252Fextension-auth-callback%253Fstate%253D6baecfa62ec973b07a1350b023004335%2526nonce%253Dcadbf008-6ff6-4b4b-88e0-5ecccb62bb45
 
-      if (decodedUrl && (
-          decodedUrl.startsWith('vscode://') || 
-          decodedUrl.startsWith('vscode-insiders://') || 
-          decodedUrl.includes('.github.dev') || 
-          decodedUrl.includes('.gitpod.io') || 
-          decodedUrl.startsWith('vscode.dev'))) {
+    const { state, ...others } = router.query;
+    if (state) {
+      const decodedUrl = new URL(decodeURIComponent(state as string));
+      for (const other of Object.keys(others)) {
+        decodedUrl.searchParams.set(other, others[other] as string);
+      }
+
+      if (decodedUrl.href && (
+          decodedUrl.href.startsWith('vscode://') || 
+          decodedUrl.href.startsWith('vscode-insiders://') || 
+          decodedUrl.href.includes('.github.dev') || 
+          decodedUrl.href.includes('.gitpod.io') || 
+          decodedUrl.href.startsWith('vscode.dev'))) {
         // router.push(decodedUrl);
-        setUrl(decodedUrl);
+        setUrl(decodedUrl.href);
       }
     }
   }, [router]);
