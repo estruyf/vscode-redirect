@@ -34,7 +34,7 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          You'll be redirected to Visual Studio Code!
+          You&apos;ll be redirected to Visual Studio Code!
         </h1>
 
         <p className={styles.description}>
