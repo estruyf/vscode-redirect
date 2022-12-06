@@ -18,7 +18,7 @@ export default function Home() {
           decodedUrl.includes('.github.dev') || 
           decodedUrl.includes('.gitpod.io') || 
           decodedUrl.startsWith('vscode.dev'))) {
-        router.push(decodedUrl);
+        // router.push(decodedUrl);
         setUrl(decodedUrl);
       }
     }
