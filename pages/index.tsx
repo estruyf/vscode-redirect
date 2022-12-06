@@ -8,8 +8,6 @@ export default function Home() {
   const [ url, setUrl ] = useState('')
 
   useEffect(() => {
-    //https://vscode-redirect-9ajo.vercel.app/?code=6p9PmlVomT-9T2QvSQ2VRlEAwkVfIYtoEMBRaDeSqi1sl&state=https%253A%252F%252Festruyf-opulent-capybara-4grqx5g7953754v.github.dev%252Fextension-auth-callback%253Fstate%253D6baecfa62ec973b07a1350b023004335%2526nonce%253Dcadbf008-6ff6-4b4b-88e0-5ecccb62bb45
-
     const { state, ...others } = router.query;
     if (state) {
       const decodedUrl = new URL(decodeURIComponent(state as string));
@@ -23,7 +21,7 @@ export default function Home() {
           decodedUrl.href.includes('.github.dev') || 
           decodedUrl.href.includes('.gitpod.io') || 
           decodedUrl.href.startsWith('vscode.dev'))) {
-        // router.push(decodedUrl);
+        router.push(decodedUrl);
         setUrl(decodedUrl.href);
       }
     }
